@@ -1,7 +1,7 @@
+import { useRecoilState } from "recoil";
+import { filesState } from "../../states/files";
+
 export function UploadPage() {
-    return (
-        <section className="upload-page">
-            <h1>UploadPage</h1>
-        </section>
-    );
+    const [files, setFiles] = useRecoilState(filesState);
+    return <section className="upload-page">{JSON.stringify(files)}</section>;
 }
