@@ -10,4 +10,5 @@ export interface FileState {
     size: number;
     mimeType: string;
     blob: Blob;
+    url: string;
 }

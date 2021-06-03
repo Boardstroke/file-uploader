@@ -16,6 +16,7 @@ export function Home() {
                     size: file.size,
                     blob: file,
                     mimeType: file.type,
+                    url: URL.createObjectURL(file),
                 })
             );
 
