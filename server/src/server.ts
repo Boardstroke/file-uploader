@@ -1,7 +1,7 @@
 import http from "http";
 import app from "./app";
 import { Server } from "socket.io";
-import url from "url";
+import fs from "fs";
 import { fileProperties } from "./components/file-upload/fileProperities";
 
 const server = http.createServer((req, res) => {
@@ -10,16 +10,23 @@ const server = http.createServer((req, res) => {
   for (let fileId of possiblesFilesIds) {
     urls.push(`/upload/${fileId}`);
   }
-  console.log(urls);
   if (!req.url) return;
+
   if (urls.includes(req.url) && req.method === "PUT") {
     let data: Buffer = Buffer.from([]);
     req.on("data", (chunk: Buffer) => {
       data = Buffer.concat([data, chunk]);
-      console.log(data);
-      io.emit("progress", data.byteLength);
+      const fileId = req.url?.split("/")[2];
+      if (!fileId) throw Error("");
+
+      const totalSize = Number.parseInt(
+        fileProperties.get(fileId)?.contentLength!
+      );
+      io.emit("progress", data.byteLength / totalSize);
     });
+
     req.on("end", () => {
+      fs.writeFileSync("./uploads/file.jpg", data);
       res.statusCode = 201;
       res.end();
     });
