@@ -1,11 +1,11 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useHistory } from "react-router";
 import { useRecoilState } from "recoil";
 import { useDragInDrop } from "../../hooks/useDragInDrop";
 import { filesState, FileState } from "../../states/files";
 import "./home.scss";
 export function Home() {
-    const [, setFiles] = useRecoilState(filesState);
+    const [files, setFiles] = useRecoilState(filesState);
     const wrapperRef = useRef(null);
     const history = useHistory();
     const { dropDiv } = useDragInDrop({
@@ -25,6 +25,10 @@ export function Home() {
         },
         ref: wrapperRef,
     });
+
+    useEffect(() => {
+        console.log(files);
+    }, [files]);
 
     return (
         <section className="home-page">

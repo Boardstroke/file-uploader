@@ -11,4 +11,5 @@ export interface FileState {
     mimeType: string;
     blob: Blob;
     url: string;
+    uploadUrl?: string;
 }
