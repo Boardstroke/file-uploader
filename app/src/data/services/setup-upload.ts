@@ -2,17 +2,14 @@ import { HttpClient, HttpResponse } from "../protocols/http-client";
 
 export class SetupUploadHttp {
     constructor(
-        private readonly httpClient: HttpClient<
-            SetupUploadRequest,
-            SetupUploadResponse
-        >
+        private readonly httpClient: HttpClient<any, SetupUploadResponse>
     ) {}
 
     async execute(body: SetupUploadRequest, headers?: Record<string, string>) {
         const response = await this.httpClient.request({
             url: "/upload",
             method: "POST",
-            body,
+            body: JSON.stringify(body),
             headers,
         });
 

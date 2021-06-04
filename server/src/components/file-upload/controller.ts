@@ -24,7 +24,6 @@ export function setupUpload(req: Request, res: Response) {
     contentLength: size,
     filename,
   });
-  console.log(fileId);
   res.setHeader("Location", `/upload/${fileId}`).status(200).send(req.body);
 }
 

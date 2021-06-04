@@ -6,12 +6,12 @@ export interface HttpClient<RequestBody, ResponseBody> {
 
 export interface HttpRequestPayload<Body = any> {
     url: string;
-    headers?: Record<string, string>;
+    headers?: any;
     method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
-    body: Body;
+    body: any;
 }
 
 export interface HttpResponse<Body = any> {
-    headers: Headers;
+    headers: any;
     body: Body;
 }
