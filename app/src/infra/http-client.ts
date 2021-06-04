@@ -11,7 +11,7 @@ export class FetchHttpClient implements HttpClient<any, any> {
         const httpResponse = await fetch(
             `http://localhost:8081${requestPayload.url}`,
             {
-                body: JSON.stringify(requestPayload.body),
+                body: requestPayload.body,
                 mode: "cors",
                 method: requestPayload.method,
                 headers: {
